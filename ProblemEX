@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <math.h>
+
+unsigned as_uint(float f)
+{
+	return *(unsigned*)&f;
+}
+
+float as_float(unsigned x)
+{
+	return *(float*)&x;
+}
+
+float change_mantissa(float i)
+{
+	float f = as_float((as_uint(i) ^ (0x002aaaaa)));
+	return f;
+}
+
+int main()
+{
+	float a;
+	float b;
+	scanf("%f", &a);
+	b = change_mantissa(a);
+	printf("%.5f", b);
+	return 0;
+}
